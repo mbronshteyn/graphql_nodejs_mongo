@@ -15,6 +15,8 @@ services:
   ```
   
 Please note that the container port is mapped to port 27018 to avoid conflict with default installation, if any.
+
+`node_modules` are not checked in.  Please run `npm install`
   
 To start the server execute `node server.js`
   
