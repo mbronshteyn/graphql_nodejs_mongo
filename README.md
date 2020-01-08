@@ -13,9 +13,15 @@ services:
     ports:
     - 27018:27017
   ```
-    
-  Please note that the container port is mapped to port 27018 to avoid conflict with default installation, if any.
   
-  To start the server execute `node server.js`
+Please note that the container port is mapped to port 27018 to avoid conflict with default installation, if any.
   
-  WORK-IN-PROGRESS: Currently some data is residing in static file
+To start the server execute `node server.js`
+  
+WORK-IN-PROGRESS: Currently some data is residing in static file
+  
+In order to interact with GraphQL please download the latest version of Postman.  It contains Beta version of the GraphQL POST body.
+
+Import Postman collection provided with the project.
+
+[MongoDB database client Robo 3T](https://www.robomongo.org/)
