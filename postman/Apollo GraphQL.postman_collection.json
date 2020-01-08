@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "60fb92df-6083-4c7b-9ac5-68990b76e670",
+    "name": "Apollo GraphQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query getAllUsers {\n    users {\n        id\n        name\n        tasks {\n            name\n            completed\n        }\n    }\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3002",
+              "path": [
+                "graphql"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetUserById {\n    user( id: \"4\" ){\n        id\n        name\n        email\n        tasks {\n            name\n            id\n        }\n    }\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3002",
+              "path": [
+                "graphql"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation CreateUser {\n    signup( input: {\n        name: \"Mike\",\n        email: \"mike@gmail.com\",\n        password: \"123456\"\n    }) {\n        id\n        name\n        email\n        createdAt\n        updatedAt\n    }\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3002",
+              "path": [
+                "graphql"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Login {\n    login( input: {\n        email: \"mike@gmail.com\",\n        password: \"123456\"\n    }) {\n        token\n    }\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3002",
+              "path": [
+                "graphql"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "task",
+      "item": [],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
