@@ -205,6 +205,38 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvYkBnbWFpbC5jb20iLCJpYXQiOjE1Nzg1ODA4NDUsImV4cCI6MTU3ODY2NzI0NX0.D9Xn1IefDtBWZV-AZFZ-lsDWgkWaw4hagw98HqDTad0",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation UpdateTask {\n    updateTask( id: \"5e176225332c9d16393231d3\", input: {\n            completed: true,\n            name: \"Shopping\"\n    }) {\n        name,\n        completed\n        id\n    }\n} ",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3002",
+              "path": [
+                "graphql"
+              ]
+            }
+          },
+          "response": []
         }
       ],
       "protocolProfileBehavior": {}

@@ -1,6 +1,7 @@
 const {skip} = require('graphql-resolvers');
 
 const Task = require('../../database/models/task');
+const {isValidObjectId} = require('../../database/util/index');
 
 module.exports.isAuthenticated = (_, __, {email}) => {
 
