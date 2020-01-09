@@ -12,7 +12,13 @@
           "name": "Get All Users",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiaWF0IjoxNTc4NDMzMjU4LCJleHAiOjE1Nzg1MTk2NTh9.G2rtMl_yH6t8ZirEhgvAUmH9EKPDzA-TVQffRIzcyT0",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "graphql",
               "graphql": {
@@ -38,11 +44,17 @@
           "name": "Get User by ID",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvYkBnbWFpbC5jb20iLCJpYXQiOjE1Nzg1ODA4NDUsImV4cCI6MTU3ODY2NzI0NX0.D9Xn1IefDtBWZV-AZFZ-lsDWgkWaw4hagw98HqDTad0",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "graphql",
               "graphql": {
-                "query": "query GetUserById {\n    user( id: \"4\" ){\n        id\n        name\n        email\n        tasks {\n            name\n            id\n        }\n    }\n}",
+                "query": "query GetUserById {\n    user {\n        id\n        name\n        email\n        tasks {\n            name\n            id\n        }\n    }\n}",
                 "variables": ""
               }
             },
@@ -64,11 +76,17 @@
           "name": "Create User",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiaWF0IjoxNTc4NDMzMjU4LCJleHAiOjE1Nzg1MTk2NTh9.G2rtMl_yH6t8ZirEhgvAUmH9EKPDzA-TVQffRIzcyT0",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "graphql",
               "graphql": {
-                "query": "mutation CreateUser {\n    signup( input: {\n        name: \"Mike\",\n        email: \"mike@gmail.com\",\n        password: \"123456\"\n    }) {\n        id\n        name\n        email\n        createdAt\n        updatedAt\n    }\n}",
+                "query": "mutation CreateUser {\n    signup( input: {\n        name: \"Bob\",\n        email: \"bob@gmail.com\",\n        password: \"123456\"\n    }) {\n        id\n        name\n        email\n        createdAt\n        updatedAt\n    }\n}",
                 "variables": ""
               }
             },
@@ -90,11 +108,17 @@
           "name": "Login",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiaWF0IjoxNTc4NDMzMjU4LCJleHAiOjE1Nzg1MTk2NTh9.G2rtMl_yH6t8ZirEhgvAUmH9EKPDzA-TVQffRIzcyT0",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "graphql",
               "graphql": {
-                "query": "mutation Login {\n    login( input: {\n        email: \"mike@gmail.com\",\n        password: \"123456\"\n    }) {\n        token\n    }\n}",
+                "query": "mutation Login {\n    login( input: {\n        email: \"bob@gmail.com\",\n        password: \"123456\"\n    }) {\n        token\n    }\n}",
                 "variables": ""
               }
             },
