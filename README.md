@@ -20,8 +20,6 @@ Please note that the container port is mapped to port 27018 to avoid conflict wi
   
 To start the server execute `node server.js`
   
-WORK-IN-PROGRESS: Currently some data is residing in static file
-  
 In order to interact with GraphQL please download the latest version of Postman.  It contains Beta version of the GraphQL POST body.
 
 ### running postman collection from command line using newman
@@ -39,3 +37,12 @@ Import Postman collection provided with the project.
 ### MongoDB Databaase Client
 
 [MongoDB database client Robo 3T](https://www.robomongo.org/)
+
+### All users are fetched out of MongoDB
+
+#### Sequence to get user
+1. Create User in Database
+2. Login as User
+3. Get JWT token which response from Login and put it in `Authorization` header for Get User. 
+    Make sure the first word in `Authorization` header is `Bearer <JWT token>`
+4. Run Get User
