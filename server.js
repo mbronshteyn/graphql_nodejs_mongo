@@ -30,7 +30,10 @@ const apolloServer = new ApolloServer({
         // req.email will be set to null in verifyUser
         await verifyUser(req);
         // show that per each request context evaluated
-        return {email: req.email};
+        return {
+            email: req.email,
+            loggedInUserId: req.loggedInUserId
+        };
     }
 });
 

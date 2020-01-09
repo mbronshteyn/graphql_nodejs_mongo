@@ -10,3 +10,7 @@ module.exports.connection = async () => {
         throw error;
     }
 };
+
+module.exports.isValidObjectId = async () => {
+    return await mongoose.Types.ObjectId.isValidObjectId(id);
+};
