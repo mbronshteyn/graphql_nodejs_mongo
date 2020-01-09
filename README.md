@@ -34,7 +34,7 @@ You should see the response from Newman.  If there are tests defined in Postman 
 
 Import Postman collection provided with the project.
 
-### MongoDB Databaase Client
+### MongoDB Database Client
 
 [MongoDB database client Robo 3T](https://www.robomongo.org/)
 
