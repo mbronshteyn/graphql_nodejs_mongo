@@ -9,10 +9,6 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    password: {
-        type: String,
-        required: true,
-    },
     user: {
         type: mongoose.Schema.Types.ObjectID,
         ref: 'User'
