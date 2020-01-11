@@ -2,7 +2,7 @@ const {gql} = require('apollo-server-express');
 
 module.exports = gql`
     extend type Query {
-        tasks: [Task!]
+        tasks( cursor: Int, limit: Int ): [Task!]
         task( id: ID! ) : Task
     }
 
@@ -14,6 +14,7 @@ module.exports = gql`
     extend type Mutation {
         createTask( input: createTaskInput ) : Task
         updateTask( id: ID!, input: updateTaskInput! ) : Task
+        deleteTask( id: ID! ) : Task
     }
 
     input updateTaskInput {
