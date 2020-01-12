@@ -26,18 +26,23 @@ app.use(cors());
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: async ({req}) => {
-        // verify user.  if user jwt token is not correct
-        // req.email will be set to null in verifyUser
-        await verifyUser(req);
-        // show that per each request context evaluated
-        return {
-            email: req.email,
-            loggedInUserId: req.loggedInUserId,
-            loaders: {
-                user: new Dataloader(keys => loaders.user.batchUsers(keys)),
-            }
+    context: async ({req, connection}) => {
+
+        const contextObj = {};
+
+        if (req) {
+            // verify user.  if user jwt token is not correct
+            // req.email will be set to null in verifyUser
+            await verifyUser(req);
+            contextObj.email = req.email;
+            contextObj.loggedInUserId = req.loggedInUserId;
+        }
+
+        contextObj.loaders = {
+            user: new Dataloader(keys => loaders.user.batchUsers(keys))
         };
+
+        return contextObj;
     }
 });
 
@@ -45,7 +50,9 @@ apolloServer.applyMiddleware({app, path: '/graphql'});
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+const httpServer = app.listen(PORT, () => {
     console.log(`server is listening on port: ${PORT}`);
     console.log(`graphql server is: ${apolloServer.graphqlPath}`);
 });
+
+apolloServer.installSubscriptionHandlers(httpServer);

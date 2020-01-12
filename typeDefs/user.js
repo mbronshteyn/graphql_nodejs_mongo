@@ -11,6 +11,10 @@ module.exports = gql`
         login( input: loginInfo ) : Token
     }
 
+    extend type Subscription {
+        userCreated: User
+    }
+
     type Token {
         token: String!
     }

@@ -6,6 +6,9 @@ const User = require('../database/models/user');
 const Task = require('../database/models/task');
 const {isAuthenticated} = require('./middleware/index');
 
+const PubSub = require('../subscription');
+const {userEvents} = require('../subscription/events');
+
 
 module.exports = {
     Query: {
@@ -33,6 +36,10 @@ module.exports = {
                 const hashedPassword = await bcrypt.hash(input.password, 12);
                 const newUser = new User({...input, password: hashedPassword});
                 const result = await newUser.save();
+
+                PubSub.publish(userEvents.USER_CREATED, {
+                    userCreated: result
+                });
 
                 return result;
 
@@ -63,6 +70,12 @@ module.exports = {
             }
         }
     },
+    Subscription: {
+        userCreated: {
+            subscribe: () => PubSub.asyncIterator(userEvents.USER_CREATED)
+        }
+    },
+
     User: {
         tasks: async ({id}) => {
             try {
