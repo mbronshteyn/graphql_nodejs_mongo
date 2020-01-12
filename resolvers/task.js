@@ -7,10 +7,28 @@ const {stringToBase64, base64ToString} = require('../helper');
 
 module.exports = {
     Query: {
-        tasks: combineResolvers(isAuthenticated, async (_, {skip = 0, limit = 2}, {loggedInUserId}) => {
+        tasks: combineResolvers(isAuthenticated, async (_, {cursor, limit = 2}, {loggedInUserId}) => {
             try {
-                const tasks = await Task.find({user: loggedInUserId}).sort({id: -1}).skip(skip).limit(limit);
-                return tasks;
+                const query = {user: loggedInUserId};
+                if (cursor) {
+                    query['_id'] = {
+                        '$lt': base64ToString(cursor)
+                    }
+                }
+                // fetch and extra record
+                // compare there response siz with limit
+                // if there is one more
+                // we have more records to fetch
+                let tasks = await Task.find(query).sort({id: -1}).limit(limit + 1);
+                const hasNextPage = tasks.length > limit;
+                tasks = hasNextPage ? tasks.slice(0, -1) : tasks;
+                return {
+                    taskFeed: tasks,
+                    pageInfo: {
+                        nextPageCursor: hasNextPage ? stringToBase64(tasks[tasks.length - 1].id) : null,
+                        hasNextPage
+                    }
+                }
             } catch (error) {
                 console.log(error);
                 throw error;
