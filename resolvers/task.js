@@ -82,9 +82,10 @@ module.exports = {
     },
     Task: {
         // extract userId from parent ( Task ) object
-        user: async (parent) => {
+        user: async (parent, _, {loaders}) => {
             try {
-                const user = await User.findById(parent.user);
+                // use dataloaders to avoid unnecessary trips to the database
+                const user = await loaders.user.load(parent.user.toString());
                 return user;
             } catch (error) {
                 console.log(error);

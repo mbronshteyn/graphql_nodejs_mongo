@@ -2,12 +2,13 @@ const express = require('express');
 const {ApolloServer} = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
+const Dataloader = require('dataloader');
 
 const resolvers = require('./resolvers');
 const typeDefs = require('./typeDefs');
-
 const {connection} = require('./database/util');
 const {verifyUser} = require('./helper/context');
+const loaders = require('./loaders');
 
 const app = express();
 
@@ -32,7 +33,10 @@ const apolloServer = new ApolloServer({
         // show that per each request context evaluated
         return {
             email: req.email,
-            loggedInUserId: req.loggedInUserId
+            loggedInUserId: req.loggedInUserId,
+            loaders: {
+                user: new Dataloader(keys => loaders.user.batchUsers(keys)),
+            }
         };
     }
 });
